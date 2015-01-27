@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/github-markdown.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+  <link rel="stylesheet" href="/css/application.css">
+  <link rel="stylesheet" href="/css/menu.css">
+  <script src="/js/jquery-2.1.3.min.js"></script>
+  <script src="/js/marked.min.js"></script>
+</head>
+<body>
+  <script type="text/x-handlebars">
+<div class="container">
+  <div id="menubar" class="col-md-3">
+    <nav class="menu">
+      <h4 class="menu-heading">General</h4>
+      {{#link-to 'doc' 'environment.md' activeClass='selected' class='menu-item'}}Environment{{/link-to}}
+      {{#link-to 'doc' 'ruby-environment.md' activeClass='selected' class='menu-item'}}Ruby Environment{{/link-to}}
+      {{#link-to 'doc' 'git-setup.md' activeClass='selected' class='menu-item'}}Git Setup{{/link-to}}
+      {{#link-to 'doc' 'git-workflow.md' activeClass='selected' class='menu-item'}}Git Workflow{{/link-to}}
+      {{#link-to 'doc' 'contributing.md' activeClass='selected' class='menu-item'}}Contributing{{/link-to}}
+
+      <h4 class="menu-heading">Server</h4>
+      {{#link-to 'doc' 'server-json.md' activeClass='selected' class='menu-item'}}JSON Objects{{/link-to}}
+    </nav>
+  </div>
+  <div class="col-md-9 markdown-body" id="content">{{outlet}}</div>
+</div>
+  </script>
+
+  <script type="text/x-handlebars" id="docs">
+<div id="conventions"></div>
+<%= "<script>$('#conventions').html(marked(#{@markdown}));</ script>" %>
+{{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="doc">
+{{{convert-markdown markdown}}}
+  </script>
+
+  <script src="/js/ember.debug.js"></script>
+  <script src="/js/ember-data.js"></script>
+  <script src="/js/ember-template-compiler.js"></script>
+  <script src="/js/highlight.min.js"></script>
+
+  <script>
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+  highlight: function(code) {
+    return hljs.highlightAuto(code).value;
+  }
+});
+
+hljs.initHighlightingOnLoad();
+
+window.App = Ember.Application.create();
+App.Router.map(function() {
+  this.resource('docs', function() {
+    this.resource('doc', { path: ':doc_id' });
+  });
+});
+
+//App.ApplicationStore = DS.Store.extend();
+App.Doc = DS.Model.extend({
+  markdown: DS.attr('string')
+});
+
+Ember.Handlebars.helper('convert-markdown', function(text) {
+  return marked(text);
+  //return Ember.Handlebars.SafeString(marked(text));
+});
+  </script>
+</body>
+</html>
