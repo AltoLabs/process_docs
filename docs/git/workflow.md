@@ -40,6 +40,25 @@ $ git push -u origin feature/my_cool_feature
 # Subsequent pushes:
 $ git push
 ```
+### Multiple people working on a branch at a time
+
+> Note: Optimally each person should work on their own branch when possible. We realize this is not always the case, ergo this section.
+
+When multiple people work on the same branch, please follow the following gitflow:
+
+```bash
+# First stage all your changes:
+$ git add --all .
+
+# Second create a descriptive commit message. Yes, "Added model for customizer." No, "Blah blah placeholder." KEEP UNDER 50 CHARACTERS
+$ git commit -m "Added model for customizer"
+
+# Third, rebase your changes on top of what is in the remote
+$ git pull --rebase
+
+# Fourth, push to remote
+$ git push
+```
 
 ### Creating a pull request
 
