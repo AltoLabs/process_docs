@@ -3,7 +3,7 @@
 
 # Make sure that vagrant-cachier is available. If not, simply exit.
 unless Vagrant.has_plugin?('vagrant-cachier')
-  raise 'The vagrant-cachier plugin is not available. Please make sure you have installed it for your platform.'
+  raise 'The vagrant-cachier plugin is not available. Install it by running `vagrant plugin install vagrant-cachier`.'
 end
 
 Vagrant.configure(2) do |config|
@@ -11,7 +11,9 @@ Vagrant.configure(2) do |config|
   config.vm.hostname          = 'ALProcessDocs'     # This is the host name that will be used accross the instance network.
   config.vm.define            :al_process_docs      # This set up the instance name in vagrant management system.
 
-  # Network port foewarding configuration.
+  # Configure cachine.
+  config.cache.scope          = :box
+  # Network port forwarding configuration.
   config.vm.network           :forwarded_port, guest: 5000, host: 5000
 
   # Set up SSH options. This allows to forward the local SSH keys to the instance, so git can use them.
@@ -26,11 +28,9 @@ Vagrant.configure(2) do |config|
     vm.memory                 = 2048
   end
 
-  # Install requirements...
-  config.vm.provision   :shell, privileged: true,
-                                path:       'vagrant/setup-system.sh'
-  config.vm.provision   :shell, privileged: false,
-                                path:       'vagrant/setup-app.sh'
+  # Provision VM.
+  config.vm.provision   :shell, privileged: true,   path: 'vagrant/setup-system.sh'
+  config.vm.provision   :shell, privileged: false,  path: 'vagrant/setup-app.sh'
 
   # This is the completion message.
   config.vm.post_up_message = <<-EOF
