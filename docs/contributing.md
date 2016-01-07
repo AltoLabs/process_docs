@@ -3,7 +3,14 @@ Code Authoring/Review Process
 
 ### Code Style
 
-When writing Ruby, please follow the [Github Ruby Style Guide](https://github.com/styleguide/ruby).
+Please follow the following style guides:
+
+- Ruby: [Ruby Style Guide][1].
+- Javascript: [Google JS Style Guide][2]
+- Javascript Comments: [JSDoc][5]
+- HTML/CSS: [Google HTML/CSS Style Guide][3]
+- SASS/SCSS (prefer SASS syntax over SCSS): [Sass Guidelines][4]
+
 For any other langauges, follow the style guide preferred by that community.
 As an example, Javascript is camelCase with four-space tabs; python is
 snake_case with four-space tabs, and so on.
@@ -51,3 +58,8 @@ Deploy Notes
 Notes regarding deployment the contained body of work.  These should note any db migrations, etc.
 ```
 
+[1]: https://github.com/bbatsov/ruby-style-guide "Community-maintained Ruby Style Guide"
+[2]: http://google.github.io/styleguide/javascriptguide.xml "Google Javascript Style Guide"
+[3]: https://google.github.io/styleguide/htmlcssguide.xml "Google HTML/CSS Style Guide"
+[4]: http://sass-guidelin.es/ "Sass Guidelines"
+[5]: http://usejsdoc.org/ "JSDoc"
