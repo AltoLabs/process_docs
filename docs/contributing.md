@@ -15,6 +15,8 @@ For any other langauges, follow the style guide preferred by that community.
 As an example, Javascript is camelCase with four-space tabs; python is
 snake_case with four-space tabs, and so on.
 
+If possible, keep lines to 80 characters or less. A little more is OK; if it is
+more than 100 characters figure out a cleaner way to write that line.
 
 ### Branching
 
